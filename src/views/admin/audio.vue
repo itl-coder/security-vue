@@ -25,25 +25,37 @@ export default {
                 {
                     id: 1,
                     title: '美术课程',
-                    cover: 'http://placehold.it/200x200',
+                    cover: 'https://i.328888.xyz/2023/05/07/i1Zx4t.jpeg',
                     duration: '3:32'
                 },
                 {
                     id: 2,
                     title: '音乐课程',
-                    cover: 'http://placehold.it/200x200',
+                    cover: 'https://i.328888.xyz/2023/05/07/i1Z7IJ.jpeg',
                     duration: '4:01'
                 },
                 {
                     id: 3,
                     title: '计算机基础课程',
-                    cover: 'http://placehold.it/200x200',
+                    cover: 'https://i.328888.xyz/2023/05/07/i1ZXvX.jpeg',
                     duration: '3:45'
                 },
                 {
                     id: 4,
                     title: '英语听力训练',
-                    cover: 'http://placehold.it/200x200',
+                    cover: 'https://i.328888.xyz/2023/05/07/i1ZEdc.jpeg',
+                    duration: '3:27'
+                },
+                {
+                    id: 5,
+                    title: '语文',
+                    cover: 'https://i.328888.xyz/2023/05/07/i1Z1pv.jpeg',
+                    duration: '3:27'
+                },
+                {
+                    id: 6,
+                    title: '励志语录',
+                    cover: 'https://i.328888.xyz/2023/05/07/i1ZakU.jpeg',
                     duration: '3:27'
                 }
             ]
@@ -53,6 +65,10 @@ export default {
 </script>
 
 <style>
+.el-card {
+    margin: 5px;
+}
+
 .image {
     width: 100%;
     height: 200px;

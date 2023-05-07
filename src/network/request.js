@@ -1,5 +1,7 @@
 // request.js
 import axios from "axios";
+import login from "@/components/Login.vue";
+import Vue from "vue";
 
 const baseURL = process.env.VUE_APP_BASE_URL;
 
@@ -15,11 +17,19 @@ export function request(config) {
     // 2.1. 请求拦截的作用
     instance.interceptors.request.use(
         (config) => {
-            const token = JSON.parse(localStorage.getItem("userinfo")).jwtToken;
-            if (token) {
-                config.headers.Authorization = `bearer ${token}`;
+            console.log("config.url: ", config.url)
+            if (config.url === "/login" || config.url === "/common/captcha") {
+                return config;
             }
-            return config;
+
+            if (config.url !== "/login") {
+                const token = JSON.parse(localStorage.getItem("userinfo")).jwtToken
+                if (token) {
+                    config.headers.Authorization = `bearer ${token}`;
+                    return config;
+                }
+            }
+
         },
         (err) => {
             // 对请求错误做些什么
@@ -52,6 +62,10 @@ export function request(config) {
             } else if (message.includes("Request failed with status code")) {
                 message = "系统接口" + message.substr(message.length - 3) + "异常";
             }
+            Vue.prototype.$message({
+                type: 'error',
+                message: `${message}`
+            })
             return Promise.reject(error)
         }
     );

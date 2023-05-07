@@ -176,8 +176,6 @@ export default {
             // 选中的多个要删除的 ids
             multipleSelection: [],
             imageName: '',
-            saveRow: {},
-            saveOrUpdateFlag: false
         }
     },
     components: {AvatarUploader},

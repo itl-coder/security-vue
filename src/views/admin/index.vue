@@ -38,7 +38,9 @@
                                     <router-link to="/admin/system">管理员管理</router-link>
                                 </el-menu-item>
                                 <el-menu-item index="1-5">
-                                    个人信息管理
+                                    <router-link to="/admin/userinfo">
+                                        个人信息管理
+                                    </router-link>
                                 </el-menu-item>
                             </el-menu-item-group>
                         </el-submenu>
@@ -88,17 +90,20 @@ import {logoutHandle} from "@/network/user/user";
 export default {
     data() {
         return {
-            username: ""
+            username: "",
+            info: {}
         }
     },
     created() {
         this.getUserInfo();
+        console.log("info: ", this.info)
     },
 
     methods: {
         // 获取用户信息
         getUserInfo() {
             let res = JSON.parse(localStorage.getItem("userinfo"))
+            this.info = res
             // 将获取的英文字符转换为大写显示
             this.username = String(res.userInfo.username).toUpperCase()
         },
@@ -112,6 +117,8 @@ export default {
                 });
                 // 页面跳转
                 this.$router.push("/login");
+                // 清空用户信息
+                localStorage.removeItem("userinfo")
             })
         },
         handleOpen() {
