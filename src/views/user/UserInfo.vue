@@ -180,10 +180,10 @@ export default {
             this.$refs.form.validate(valid => {
                 if (valid) {
                     // 表单验证通过，可以在这里提交表单数据
-                    console.log('表单验证通过', this.form)
+
                 } else {
                     // 表单验证失败，可以在这里处理错误信息
-                    console.log('表单验证失败')
+
                     return false
                 }
             })

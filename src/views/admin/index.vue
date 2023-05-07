@@ -25,19 +25,19 @@
                                 <el-menu-item index="1-1">
                                     <router-link to="/admin/user">学生管理</router-link>
                                 </el-menu-item>
-                                <el-menu-item index="1-2">
+                                <el-menu-item index="1-2" v-if="authUserType<3">
                                     <router-link to="/admin/teacher">教师管理</router-link>
                                 </el-menu-item>
-                                <el-menu-item index="1-3">
+                                <el-menu-item index="1-3" v-if="authUserType<3">
                                     <router-link to="/admin/clazz">班级管理</router-link>
                                 </el-menu-item>
-                                <el-menu-item index="1-4">
+                                <el-menu-item index="1-4" v-if="authUserType<3">
                                     <router-link to="/admin/grade">年纪管理</router-link>
                                 </el-menu-item>
-                                <el-menu-item index="1-5">
+                                <el-menu-item index="1-5" v-if="authUserType===1">
                                     <router-link to="/admin/system">管理员管理</router-link>
                                 </el-menu-item>
-                                <el-menu-item index="1-5">
+                                <el-menu-item index="1-6">
                                     <router-link to="/admin/userinfo">
                                         个人信息管理
                                     </router-link>
@@ -91,12 +91,13 @@ export default {
     data() {
         return {
             username: "",
-            info: {}
+            info: {},
+            authUserType: ''
         }
     },
     created() {
         this.getUserInfo();
-        console.log("info: ", this.info)
+        this.authUserType = this.info.userInfo.userType
     },
 
     methods: {

@@ -184,7 +184,7 @@ export default {
     },
     methods: {
         getImage(image) {
-            console.log("image: ", image)
+            
             return `http://localhost:8080/download?name=${image}`
         },
         // 点击按钮删除该行的数据
@@ -194,8 +194,6 @@ export default {
                 cancelButtonText: '取消',
                 type: 'warning'
             }).then(() => {
-                // 获取id
-                console.log("delete: ", row.id)
                 removeByIdOne(row.id).then(res => {
                     this.$message.success(res.message)
                 })
@@ -217,14 +215,12 @@ export default {
         },
         getSendImageName(name) {
             this.imageName = name
-            console.log("$emit: ", name)
         },
         saveUser() {
             this.$refs.ruleForm.validate((valid) => {
                 // 通过表单验证,发送添加请求
                 if (valid) {
                     saveUser(this.addRuleForm).then(res => {
-                        console.log("user: ", res)
                         this.$message({
                             type: "success",
                             message: res.message
@@ -247,11 +243,9 @@ export default {
                     ...this.addRuleForm,
                     photo: this.imageName
                 }
-                console.log("data: ", data)
                 // 通过表单验证,发送添加请求
                 if (valid) {
                     saveUser(data).then(res => {
-                        console.log("user: ", res)
                         this.$message({
                             type: "success",
                             message: res.message
@@ -283,7 +277,7 @@ export default {
 
         // 多选处理
         handleSelectionChange(e) {
-            console.log(e) // [{},{}]
+             // [{},{}]
             for (let i = 0; i < e.length; i++) {
                 // 对象的id
                 this.multipleSelection.push(e[i].id)

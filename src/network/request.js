@@ -17,7 +17,7 @@ export function request(config) {
     // 2.1. 请求拦截的作用
     instance.interceptors.request.use(
         (config) => {
-            console.log("config.url: ", config.url)
+              
             if (config.url === "/login" || config.url === "/common/captcha") {
                 return config;
             }
@@ -53,7 +53,7 @@ export function request(config) {
             }
         },
         (error) => {
-            console.log('err' + error)
+              
             let {message} = error;
             if (message == "Network Error") {
                 message = "后端接口连接异常";

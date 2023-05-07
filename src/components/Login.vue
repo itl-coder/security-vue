@@ -102,7 +102,7 @@ export default {
     refreshCaptcha() {
       refNewCode().then(res => {
         // 先查看获取到的数据模型
-        console.log(res)
+
         // 再进行下一步就明确自己要怎么获取数据量了
         if (res.code === 200) {
           // 解析 base64 图片资源 data:image/png;base64,
@@ -140,7 +140,7 @@ export default {
                 duration: 1000
               });
               // 存储登录信息
-              console.log("存储登录信息: ", res)
+
               localStorage.setItem("userinfo", JSON.stringify(res.data))
               // TODO 页面跳转
               this.$router.push("/admin")

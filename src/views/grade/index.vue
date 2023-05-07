@@ -166,7 +166,7 @@ export default {
                 type: 'warning'
             }).then(() => {
                 // 获取id
-                console.log("delete: ", row.gradeId)
+
                 removeByIdOne(row.gradeId).then(res => {
                     this.$message.success(res.message)
                 })
@@ -216,7 +216,7 @@ export default {
 
         // 多选处理
         handleSelectionChange(e) {
-            console.log(e) // [{},{}]
+               // [{},{}]
             for (let i = 0; i < e.length; i++) {
                 // 对象的id
                 this.multipleSelection.push(e[i].gradeId)

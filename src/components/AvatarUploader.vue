@@ -22,7 +22,7 @@ export default {
     },
     methods: {
         handleAvatarSuccess(res, file) {
-            console.log("handleAvatarSuccess", res.data)
+
             // res.data => user[子组件将上传后的文件名传递给父组件]
             this.$emit("send-image-name", res.data);
             this.imageUrl = `http://localhost:8080/download?name=${res.data}`;

@@ -167,7 +167,7 @@ export default {
                 type: 'warning'
             }).then(() => {
                 // 获取id
-                console.log("delete: ", row.gradeId)
+
                 removeByIdOne(row.gradeId).then(res => {
                     this.$message.success(res.message)
                 })
@@ -217,7 +217,7 @@ export default {
 
         // 多选处理
         handleSelectionChange(e) {
-            console.log(e) // [{},{}]
+               // [{},{}]
             for (let i = 0; i < e.length; i++) {
                 // 对象的id
                 this.multipleSelection.push(e[i].gradeId)
@@ -243,7 +243,7 @@ export default {
         fetchData() {
             // 发送请求，获取分页的数据
             getTeacherData(this.page, this.limit, this.searchObj).then(res => {
-                console.log(res)
+
                 // 将获取到的数据进行持久化
                 this.total = res.data.total
                 this.gradeData = res.data.records
