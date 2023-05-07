@@ -176,7 +176,8 @@ export default {
             // 选中的多个要删除的 ids
             multipleSelection: [],
             imageName: '',
-            saveRow:{}
+            saveRow: {},
+            saveOrUpdateFlag: false
         }
     },
     components: {AvatarUploader},
@@ -208,7 +209,6 @@ export default {
         },
         // 编辑按钮处理事件
         editorHandleClick(row) {
-            this.saveRow = row
             // 显示弹窗
             this.dialogVisible = true
             // 更换标题
@@ -216,33 +216,6 @@ export default {
             // 数据回显
             // TODO photo 回显: 父组件向子组件传递图片名称,子组件进行下载
             this.addRuleForm = row
-            // 重新组织数据作为回显数据
-            this.$refs.ruleForm.validate((valid) => {
-                // 重新组织表单数据作为本次的提交
-                const data = {
-                    ...row,
-                    photo: this.imageName
-                }
-                console.log("data: ", data)
-                // 通过表单验证,发送添加请求
-                if (valid) {
-                    saveUser(data).then(res => {
-                        console.log("user: ", res)
-                        this.$message({
-                            type: "success",
-                            message: res.message
-                        });
-                        // 重新获取数据
-                        this.fetchData()
-                    })
-                } else {
-                    // 提示错误信息
-                    this.$message.error(res.message || '表单验证失败，请检查输入！');
-                    return false;
-                }
-            });
-            // 关闭弹窗
-            this.handleClose()
         },
         getSendImageName(name) {
             this.imageName = name
@@ -268,13 +241,42 @@ export default {
                 }
             });
         },
+        update() {
+            // 重新组织数据作为回显数据
+            this.$refs.ruleForm.validate((valid) => {
+                // 重新组织表单数据作为本次的提交
+                const data = {
+                    ...this.addRuleForm,
+                    photo: this.imageName
+                }
+                console.log("data: ", data)
+                // 通过表单验证,发送添加请求
+                if (valid) {
+                    saveUser(data).then(res => {
+                        console.log("user: ", res)
+                        this.$message({
+                            type: "success",
+                            message: res.message
+                        });
+                        // 重新获取数据
+                        this.fetchData()
+                    })
+                } else {
+                    // 提示错误信息
+                    this.$message.error(res.message || '表单验证失败，请检查输入！');
+                    return false;
+                }
+            });
+            // 关闭弹窗
+            this.handleClose()
+        },
         saveOrUpdateGradeHandle() {
             // 如何区分 save | update
-            if (this.dialogVisible) {
-               this.editorHandleClick(this.saveRow)
-            } else {
-                console.log("save......")
-                this.saveUser();
+            if (this.dialogVisibleTitle === '更新用户信息') {
+                this.update();
+            }
+            if (this.dialogVisibleTitle === '添加用户信息') {
+                this.saveUser()
             }
         },
         resetForm() {
