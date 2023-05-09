@@ -28,10 +28,10 @@
                                 <el-menu-item index="1-2" v-if="authUserType<3">
                                     <router-link to="/admin/teacher">教师管理</router-link>
                                 </el-menu-item>
-                                <el-menu-item index="1-3" v-if="authUserType<3">
+                                <el-menu-item index="1-3" v-if="authUserType<2">
                                     <router-link to="/admin/clazz">班级管理</router-link>
                                 </el-menu-item>
-                                <el-menu-item index="1-4" v-if="authUserType<3">
+                                <el-menu-item index="1-4" v-if="authUserType===3">
                                     <router-link to="/admin/grade">年纪管理</router-link>
                                 </el-menu-item>
                                 <el-menu-item index="1-5" v-if="authUserType===1">

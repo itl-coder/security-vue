@@ -18,7 +18,18 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
+    created() {
+        axios.get("https://api.thecatapi.com/v1/images/search?limit=6").then(
+            res => {
+                // res.data[0].url
+                for (let i = 0; i < res.data.length; i++) {
+                    this.audioList[i].cover = res.data[i].url
+                }
+            })
+    },
     data() {
         return {
             audioList: [

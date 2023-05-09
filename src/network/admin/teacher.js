@@ -9,10 +9,10 @@ export function getTeacherData(pageNo, pageSize, teacherName) {
   });
 }
 
-export function saveOrUpdateGrade(grade) {
+export function saveOrUpdateTeacher(grade) {
   return request({
     method: "post",
-    url: `/teacher/getTeacher/saveOrUpdateGrade`,
+    url: `/teacher/getTeacher/save`,
     data: grade,
   });
 }
@@ -27,7 +27,8 @@ export function removeByIdOne(gradeId) {
 export function removeByIds(gradeIds) {
   return request({
     method: "delete",
-    url: `/teacher/getTeacher/deleteGrade`,
+    url: `/teacher/getTeacher/deleteTeacher`,
     data: gradeIds,
   });
 }
+

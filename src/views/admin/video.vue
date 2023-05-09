@@ -38,7 +38,7 @@ export default {
                             {
                                 id: '1-1',
                                 title: '加法',
-                                src: '../../assets/video/english.mp4'
+                                src: 'https://api.thecatapi.com/v1/images/search?limit=1'
                             },
                             {
                                 id: '1-2',

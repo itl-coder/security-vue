@@ -42,19 +42,19 @@ export default {
                             id: '1',
                             title: '小学语文习题一',
                             thumbnailUrl: 'https://picsum.photos/200/150?random=1',
-                            pdfUrl: '/pdfs/chinese/exercise1.pdf'
+                            pdfUrl: 'https://i.328888.xyz/2023/05/07/i1Z1pv.jpeg'
                         },
                         {
                             id: '2',
                             title: '小学语文习题二',
                             thumbnailUrl: 'https://picsum.photos/200/150?random=2',
-                            pdfUrl: '/pdfs/chinese/exercise2.pdf'
+                            pdfUrl: 'https://i.328888.xyz/2023/05/07/i1ZXvX.jpeg'
                         },
                         {
                             id: '3',
                             title: '初中语文习题一',
                             thumbnailUrl: 'https://picsum.photos/200/150?random=3',
-                            pdfUrl: '/pdfs/chinese/exercise3.pdf'
+                            pdfUrl: 'https://i.328888.xyz/2023/05/07/i1ZXvX.jpeg'
                         }
                     ]
                 },
@@ -65,19 +65,19 @@ export default {
                             id: '4',
                             title: '小学数学习题一',
                             thumbnailUrl: 'https://picsum.photos/200/150?random=4',
-                            pdfUrl: '/pdfs/math/exercise1.pdf'
+                            pdfUrl: 'https://i.328888.xyz/2023/05/07/i1ZXvX.jpeg'
                         },
                         {
                             id: '5',
                             title: '小学数学习题二',
                             thumbnailUrl: 'https://picsum.photos/200/150?random=5',
-                            pdfUrl: '/pdfs/math/exercise2.pdf'
+                            pdfUrl: 'https://i.328888.xyz/2023/05/07/i1ZXvX.jpeg'
                         },
                         {
                             id: '6',
                             title: '初中数学习题一',
                             thumbnailUrl: 'https://picsum.photos/200/150?random=6',
-                            pdfUrl: '/pdfs/math/exercise3.pdf'
+                            pdfUrl: 'https://i.328888.xyz/2023/05/07/i1ZXvX.jpeg'
                         }
                     ]
                 },
@@ -88,19 +88,19 @@ export default {
                             id: '7',
                             title: '小学英语习题一',
                             thumbnailUrl: 'https://picsum.photos/200/150?random=7',
-                            pdfUrl: '/pdfs/english/exWercise1.pdf'
+                            pdfUrl: 'https://i.328888.xyz/2023/05/07/i1ZXvX.jpeg'
                         },
                         {
                             id: '8',
                             title: '小学英语习题二',
                             thumbnailUrl: 'https://picsum.photos/200/150?random=8',
-                            pdfUrl: '/pdfs/english/exercise2.pdf'
+                            pdfUrl: 'https://i.328888.xyz/2023/05/07/i1ZXvX.jpeg'
                         },
                         {
                             id: '9',
                             title: '初中英语习题一',
                             thumbnailUrl: 'https://picsum.photos/200/150?random=9',
-                            pdfUrl: '/pdfs/english/exercise3.pdf'
+                            pdfUrl: 'https://i.328888.xyz/2023/05/07/i1ZXvX.jpeg'
                         }
                     ]
                 }

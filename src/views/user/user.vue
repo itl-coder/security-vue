@@ -184,7 +184,6 @@ export default {
     },
     methods: {
         getImage(image) {
-            
             return `http://localhost:8080/download?name=${image}`
         },
         // 点击按钮删除该行的数据
