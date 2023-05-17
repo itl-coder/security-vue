@@ -3,8 +3,8 @@
         <el-card>
             <!-- 条件-按钮组件 -->
             <div class="op-btn">
-                <el-button type="primary" icon="el-icon-plus" @click="dialogVisible = true">添加</el-button>
-                <el-button type="danger" icon="el-icon-delete" @click="deleteByIds">批量删除</el-button>
+                <el-button type="primary" icon="el-icon-plus" @click="dialogVisible = true" v-if="loginUserType==='1' || loginUserType==='2'">添加</el-button>
+                <el-button type="danger" icon="el-icon-delete" @click="deleteByIds"  v-if="loginUserType==='1' || loginUserType==='2'">批量删除</el-button>
                 <div class="classInfo">
                     <span>用户姓名:</span>
                     <el-input placeholder="请输入用户姓名" v-model="searchObj" clearable>
@@ -41,8 +41,10 @@
                 </el-table-column>
                 <el-table-column label="操作" show-overflow-tooltip align="center">
                     <template slot-scope="scope">
-                        <el-button @click="editorHandleClick(scope.row)" type="warning" size="small">修改</el-button>
-                        <el-button type="danger" size="small" @click="deleteRowData(scope.row)">删除</el-button>
+                        <el-button @click="detailHandleClick(scope.row)" type="primary" size="small">详细信息
+                        </el-button>
+                        <el-button @click="editorHandleClick(scope.row)" type="warning" size="small" v-if="loginUserType==='1'">修改</el-button>
+                        <el-button type="danger" size="small" @click="deleteRowData(scope.row)" v-if="loginUserType==='1'">删除</el-button>
                     </template>
                 </el-table-column>
             </el-table>
@@ -88,6 +90,82 @@
                            layout="total, sizes, prev, pager, next, jumper"
                            :total="total">
             </el-pagination>
+
+            <!-- 用户详细信息 -->
+            <el-dialog
+                    title="学生详细信息"
+                    :visible.sync="detailDialogVisible"
+                    width="50%"
+                    :before-close="detailInfoClose">
+                <el-descriptions class="margin-top" :column="3" :size="size" border>
+                    <el-descriptions-item>
+                        <template slot="label">
+                            <i class="el-icon-user"></i>
+                            用户名
+                        </template>
+                        <el-tag> {{ detailInfo.username }}</el-tag>
+                    </el-descriptions-item>
+                    <el-descriptions-item>
+                        <template slot="label">
+                            <i class="el-icon-mobile-phone"></i>
+                            手机号
+                        </template>
+                        {{ detailInfo.phone }}
+                    </el-descriptions-item>
+
+                    <el-descriptions-item>
+                        <template slot="label">
+                            <i class="el-icon-s-comment"></i>
+                            邮箱
+                        </template>
+                        {{ detailInfo.email }}
+                    </el-descriptions-item>
+
+                    <el-descriptions-item>
+                        <template slot="label">
+                            <i class="el-icon-location-outline"></i>
+                            居住地
+                        </template>
+                        陕西省xxxxxxx
+                    </el-descriptions-item>
+                    <el-descriptions-item>
+                        <template slot="label">
+                            <i class="el-icon-tickets"></i>
+                            备注
+                        </template>
+                        <el-tag size="small">学生</el-tag>
+                    </el-descriptions-item>
+                    <el-descriptions-item>
+                        <template slot="label">
+                            <i class="el-icon-office-building"></i>
+                            联系地址
+                        </template>
+                        陕西省吴中区吴中大道 1188 号
+                    </el-descriptions-item>
+                    <el-descriptions-item>
+                        <template slot="label">
+                            <i class="el-icon-office-building"></i>
+                            所在班级
+                        </template>
+                        七年级八班
+                    </el-descriptions-item>
+                    <el-descriptions-item>
+                        <template slot="label">
+                            <i class="el-icon-office-building"></i>
+                            学生家长
+                        </template>
+                        <el-tag type="success">xxxxxxxx</el-tag>
+                    </el-descriptions-item>
+
+                    <el-descriptions-item>
+                        <template slot="label">
+                            <i class="el-icon-phone"></i>
+                            家长联系方式
+                        </template>
+                        <el-tag type="success">xxxxxxxx</el-tag>
+                    </el-descriptions-item>
+                </el-descriptions>
+            </el-dialog>
         </el-card>
     </div>
 </template>
@@ -100,40 +178,15 @@ import {headerImgUpload} from "@/network/admin/upload";
 
 import axios from "axios";
 
-export default {
 
+import {validateEmail, validatePhoneNumber} from "@/utils/validateUtils"
+
+export default {
     data() {
-        // 自定义验证邮箱
-        const validateEmail = (rule, value, callback) => {
-            if (value === '') {
-                callback(new Error('请输入邮箱'));
-            } else {
-                const reg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/
-                if (!reg.test(value)) {
-                    if (value.endsWith('@qq.com')) {
-                        callback(new Error('QQ邮箱无法验证，请输入其他邮箱'));
-                    } else {
-                        callback(new Error('请输入正确的邮箱格式'));
-                    }
-                } else {
-                    callback();
-                }
-            }
-        };
-        // 自定义三大运行商的手机号验证
-        const validatePhoneNumber = (rule, value, callback) => {
-            if (value === '') {
-                callback(new Error('请输入手机号'));
-            } else {
-                const reg = /^1(3|4|5|6|7|8|9)\d{9}$/;
-                if (!reg.test(value)) {
-                    callback(new Error('请输入正确的手机号格式'));
-                } else {
-                    callback();
-                }
-            }
-        };
         return {
+            size: '',
+            // 用户详细信息默认关闭
+            detailDialogVisible: false,
             dialogVisibleTitle: "添加用户信息",
             // 是否显示
             dialogVisible: false,
@@ -153,6 +206,7 @@ export default {
                 phone: '',
                 photo: ''
             },
+            detailInfo: {},
             rules: {
                 username: [
                     {required: true, message: '请输入用户名称', trigger: 'blur'},
@@ -176,13 +230,30 @@ export default {
             // 选中的多个要删除的 ids
             multipleSelection: [],
             imageName: '',
+            loginUserType: ''
         }
     },
     components: {AvatarUploader},
     created() {
         this.fetchData()
+
+        const loginUserType = JSON.parse(localStorage.getItem("userinfo")).userInfo.userType
+        this.loginUserType = loginUserType
     },
     methods: {
+        detailInfoClose() {
+            this.detailDialogVisible = false
+        },
+        // 查看用户的详细信息
+        detailHandleClick(row) {
+            this.detailDialogVisible = true
+            // 组织数据显示
+            this.detailInfo.username = row.username
+            this.detailInfo.phone = row.phone
+            this.detailInfo.email = row.email
+
+
+        },
         getImage(image) {
             return `http://localhost:8080/download?name=${image}`
         },
@@ -276,7 +347,7 @@ export default {
 
         // 多选处理
         handleSelectionChange(e) {
-             // [{},{}]
+            // [{},{}]
             for (let i = 0; i < e.length; i++) {
                 // 对象的id
                 this.multipleSelection.push(e[i].id)

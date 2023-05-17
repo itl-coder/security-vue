@@ -5,7 +5,7 @@
                 智慧校园云台系统
             </div>
             <div class="right">
-                <span>{{ username }}</span>
+                <span>{{ username }} </span>
                 <img src="@/assets/img/avat.gif" alt="" title="点击图像退出" @click="myLogoutHandle">
             </div>
         </el-header>
@@ -31,10 +31,10 @@
                                 <el-menu-item index="1-3" v-if="authUserType<2">
                                     <router-link to="/admin/clazz">班级管理</router-link>
                                 </el-menu-item>
-                                <el-menu-item index="1-4" v-if="authUserType===3">
-                                    <router-link to="/admin/grade">年纪管理</router-link>
+                                <el-menu-item index="1-4" v-if="authUserType<3">
+                                    <router-link to="/admin/grade">年级管理</router-link>
                                 </el-menu-item>
-                                <el-menu-item index="1-5" v-if="authUserType===1">
+                                <el-menu-item index="1-5" v-if="authUserType==='1'">
                                     <router-link to="/admin/system">管理员管理</router-link>
                                 </el-menu-item>
                                 <el-menu-item index="1-6">

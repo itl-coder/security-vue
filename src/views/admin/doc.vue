@@ -81,7 +81,7 @@ export default {
                 // res.data[0].url
                 for (let i = 0; i < res.data.length; i++) {
                     this.pdfList[i].thumbUrl = res.data[i].url
-                    this.pdfList[i].pdfUrl = res.data[i].url
+                    // this.pdfList[i].pdfUrl = res.data[i].url
                 }
             })
     }
