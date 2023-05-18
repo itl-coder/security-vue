@@ -18,6 +18,7 @@
                                 <i class="el-icon-location"></i>
                                 <span>系统管理</span>
                             </template>
+
                             <el-menu-item-group>
                                 <el-menu-item index="1-0">
                                     <router-link to="/admin/home">首页</router-link>
@@ -31,7 +32,7 @@
                                 <el-menu-item index="1-3" v-if="authUserType<2">
                                     <router-link to="/admin/clazz">班级管理</router-link>
                                 </el-menu-item>
-                                <el-menu-item index="1-4" v-if="authUserType<3">
+                                <el-menu-item index="1-4" v-if="authUserType==='1'">
                                     <router-link to="/admin/grade">年级管理</router-link>
                                 </el-menu-item>
                                 <el-menu-item index="1-5" v-if="authUserType==='1'">

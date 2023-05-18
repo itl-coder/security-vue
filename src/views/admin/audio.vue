@@ -1,19 +1,40 @@
 <template>
     <div>
-        <el-row>
-            <el-col :xs="24" :sm="12" :md="8" v-for="item in audioList" :key="item.id">
-                <el-card :body-style="{ padding: '0px' }">
-                    <img :src="item.cover" class="image">
-                    <div style="padding: 14px;">
-                        <span class="title">{{ item.title }}</span>
-                        <div class="bottom clearfix">
-                            <el-button type="text" size="small" class="float-right">播放</el-button>
-                            <div class="float-left">{{ item.duration }}</div>
+        <el-card>
+            <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" background-color="#ffffff"
+                     @select="handleSelect">
+                <el-menu-item index="1">
+                    <router-link to="/admin/home">首页</router-link>
+                </el-menu-item>
+                <el-submenu index="2">
+                    <template slot="title">推荐</template>
+                    <el-menu-item index="2-1">计算机基础</el-menu-item>
+                    <el-menu-item index="2-2">道德与法治</el-menu-item>
+                    <el-menu-item index="2-3">选项3</el-menu-item>
+                </el-submenu>
+                <el-menu-item index="3">课程教学</el-menu-item>
+                <el-menu-item index="4"><a href="https://www.ele.me" target="_blank">劳动教育</a></el-menu-item>
+                <el-menu-item index="5"><a href="https://www.ele.me" target="_blank">课后服务</a></el-menu-item>
+                <el-menu-item index="6"><a href="https://www.ele.me" target="_blank">家庭教育</a></el-menu-item>
+                <el-menu-item index="7"><a href="https://www.ele.me" target="_blank">教材经验</a></el-menu-item>
+            </el-menu>
+        </el-card>
+        <el-card>
+            <el-row>
+                <el-col :xs="24" :sm="12" :md="8" v-for="item in audioList" :key="item.id">
+                    <el-card :body-style="{ padding: '0px' }">
+                        <img :src="item.cover" class="image">
+                        <div style="padding: 14px;">
+                            <span class="title">{{ item.title }}</span>
+                            <div class="bottom clearfix">
+                                <el-button type="text" size="small" class="float-right">播放</el-button>
+                                <div class="float-left">{{ item.duration }}</div>
+                            </div>
                         </div>
-                    </div>
-                </el-card>
-            </el-col>
-        </el-row>
+                    </el-card>
+                </el-col>
+            </el-row>
+        </el-card>
     </div>
 </template>
 

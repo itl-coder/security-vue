@@ -3,8 +3,12 @@
         <el-card>
             <!-- 条件-按钮组件 -->
             <div class="op-btn">
-                <el-button type="primary" icon="el-icon-plus" @click="dialogVisible = true" v-if="loginUserType==='1' || loginUserType==='2'">添加</el-button>
-                <el-button type="danger" icon="el-icon-delete" @click="deleteByIds"  v-if="loginUserType==='1' || loginUserType==='2'">批量删除</el-button>
+                <el-button type="primary" icon="el-icon-plus" @click="dialogVisible = true"
+                           v-if="loginUserType==='1' || loginUserType==='2'">添加
+                </el-button>
+                <el-button type="danger" icon="el-icon-delete" @click="deleteByIds"
+                           v-if="loginUserType==='1' || loginUserType==='2'">批量删除
+                </el-button>
                 <div class="classInfo">
                     <span>用户姓名:</span>
                     <el-input placeholder="请输入用户姓名" v-model="searchObj" clearable>
@@ -43,8 +47,12 @@
                     <template slot-scope="scope">
                         <el-button @click="detailHandleClick(scope.row)" type="primary" size="small">详细信息
                         </el-button>
-                        <el-button @click="editorHandleClick(scope.row)" type="warning" size="small" v-if="loginUserType==='1'">修改</el-button>
-                        <el-button type="danger" size="small" @click="deleteRowData(scope.row)" v-if="loginUserType==='1'">删除</el-button>
+                        <el-button @click="editorHandleClick(scope.row)" type="warning" size="small"
+                                   v-if="loginUserType==='1'">修改
+                        </el-button>
+                        <el-button type="danger" size="small" @click="deleteRowData(scope.row)"
+                                   v-if="loginUserType==='1'">删除
+                        </el-button>
                     </template>
                 </el-table-column>
             </el-table>
@@ -403,11 +411,17 @@ export default {
 </script>
 
 <style lang="less" scoped>
+.el-image {
+  border-radius: 50%;
+
+}
+
 .cell-container {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 60px;
+    padding: 2px;
 }
 
 .avatar-uploader-cell {
